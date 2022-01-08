@@ -1,10 +1,3 @@
-provider "Azurerm"{
-    version = ">=1.5"
-}
-terraform {
-  required_version = ">= 0.12"
-}
-
 #ResourceGroup
 resource "azurerm_resource_group" "RGEmmaX"{
     Name = "RG EmmaX"
