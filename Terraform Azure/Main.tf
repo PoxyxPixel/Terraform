@@ -20,6 +20,7 @@ resource "azurerm_subnet" "SubnetEmmaX" {
   address_prefixes     = ["10.10.1.0/24"]
 }
 
+#NIC
 resource "azurerm_network_interface" "NICEmmaX" {
   name                = "EmmaX-nic"
   location            = azurerm_resource_group.main.location
@@ -33,19 +34,9 @@ resource "azurerm_network_interface" "NICEmmaX" {
   }
 }
 
-resource "azurerm_network_interface" "main" {
-  name                = "${var.prefix}-nic"
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
 
-  ip_configuration {
-    name                          = "testconfiguration1"
-    subnet_id                     = azurerm_subnet.internal.id
-    private_ip_address_allocation = "Dynamic"
-  }
-}
-
-resource "azurerm_virtual_machine" "main" {
+#Actual VM
+resource "azurerm_virtual_machine" "UbuntuEmmaX" {
   name                  = "Apache2"
   location              = azurerm_resource_group.RGEmmaX.location
   resource_group_name   = azurerm_resource_group.RGEmmaX.name
