@@ -31,13 +31,31 @@ resource "aws_instance" "ApacheStatic" {
     device_index = 0
     network_interface_id = aws_network_interface.NetInterfaceEmmaX.id
   }
+  connection {
+    type = "ssh"
+    user = "ubuntu"
+    private_key = file(pathexpand("/home/pixel/Documents/Calein.pem"))
+    host = aws_eip.EmmaX.public_ip
+    }
 
-  user_data = <<-EOF
-              #!/bin/bash
-              sudo apt-get update
-              sudo apt-get install apache2 -y
-              sudo systemctl start apache2
-              EOF
+  provisioner "remote-exec" {
+  inline = [
+  "sudo apt-get update",
+  "sudo apt-get -f install apache2 -y",
+  "sudo mv /var/www/index/index.html /var/www/index/index.html.default",
+  ]
+  }
+
+  provisioner "file" {
+    source = "/home/pixel/Indexes/index.html"
+    destination = "/var/www/index/index.html"
+  }
+  provisioner "remote-exec" {
+  inline = [
+  "sudo service apache2 restart"
+  ]
+
+}
   tags = {
     Name = "SitePLSUpload"
   }
