@@ -13,7 +13,7 @@
 
 ###########################################################################################
 
-#Terra Req (Well lemne, not needed )
+#Terra ver check -v
 terraform {
   required_version = ">= 0.12"
 }
