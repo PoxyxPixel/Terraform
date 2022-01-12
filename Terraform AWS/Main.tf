@@ -42,6 +42,7 @@ resource "aws_instance" "ApacheStatic" {
   inline = [
   "sudo apt-get update",
   "sudo apt-get upgrade -y",
+  "sleep 30",
   "sudo apt-get -f install apache2 -y",
   "sudo mv /var/www/html/index.html /var/www/html/index.html.backup",
   ]
