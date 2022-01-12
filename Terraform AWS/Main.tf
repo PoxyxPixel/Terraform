@@ -41,20 +41,25 @@ resource "aws_instance" "ApacheStatic" {
   provisioner "remote-exec" {
   inline = [
   "sudo apt-get update",
+  "sudo apt-get upgrade -y",
   "sudo apt-get -f install apache2 -y",
-  "sudo mv /var/www/index/index.html /var/www/index/index.html.default",
+  "sudo mv /var/www/html/index.html /var/www/html/index.html.backup",
   ]
+  on_failure = continue
   }
 
   provisioner "file" {
     source = "/home/pixel/Indexes/index.html"
-    destination = "/var/www/index/index.html"
+    destination = "/home/ubuntu/index.html"
+    on_failure = continue
   }
   provisioner "remote-exec" {
   inline = [
-  "sudo service apache2 restart"
+  "sudo mv /home/ubuntu/index.html /var/www/html/index.html",
+  "sudo service apache2 restart",
+  "sudo ufw allow 80"
   ]
-
+  on_failure = continue
 }
   tags = {
     Name = "SitePLSUpload"

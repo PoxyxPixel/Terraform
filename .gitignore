@@ -3,3 +3,4 @@ Terraform AWS/.terraform/providers/registry.terraform.io/hashicorp/aws/3.71.0/li
 Terraform AWS/terraform.tfstate
 Terraform AWS/terraform.tfstate.backup
 Terraform AWS/.terraform.tfstate.lock.info
+terraform.tfstate
