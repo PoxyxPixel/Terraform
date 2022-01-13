@@ -1,15 +1,15 @@
 #ResourceGroup
-resource "azurerm_resource_group" "RGEmmaX"{
-    Name = "RG EmmaX"
-    location = "easteurope"
+resource "azurerm_resource_group" "RGEmmaX" {
+  Name     = "RG EmmaX"
+  location = "easteurope"
 }
 
 #Virtual Network
-resource "azurerm_virtual_network" "VNEmmaX"{
-    name                = "EmmaX-network"
-    address_space       = ["10.10.0.0/16"]
-    location            = azurerm_resource_group.main.location
-    resource_group_name = azurerm_resource_group.main.name
+resource "azurerm_virtual_network" "VNEmmaX" {
+  name                = "EmmaX-network"
+  address_space       = ["10.10.0.0/16"]
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
 }
 
 #Subnet
@@ -37,12 +37,12 @@ resource "azurerm_network_interface" "NICEmmaX" {
 
 #Actual VM
 resource "azurerm_virtual_machine" "UbuntuEmmaX" {
-  name                  = "Apache2"
-  location              = azurerm_resource_group.RGEmmaX.location
-  resource_group_name   = azurerm_resource_group.RGEmmaX.name
-  network_interface_ids = [azurerm_network_interface.NICEmmaX.id]
-  vm_size               = "Standard_DS1_v2"
-  delete_os_disk_on_termination = true
+  name                             = "Apache2"
+  location                         = azurerm_resource_group.RGEmmaX.location
+  resource_group_name              = azurerm_resource_group.RGEmmaX.name
+  network_interface_ids            = [azurerm_network_interface.NICEmmaX.id]
+  vm_size                          = "Standard_DS1_v2"
+  delete_os_disk_on_termination    = true
   delete_data_disks_on_termination = true
 
   storage_image_reference {
