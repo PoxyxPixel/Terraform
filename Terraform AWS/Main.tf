@@ -23,7 +23,7 @@ resource "aws_vpc" "VPCEmmaX" {
 
 #Instance ---> Customized
 resource "aws_instance" "ApacheStatic" {
-  ami               = "ami-0d527b8c289b4af7f"
+  ami               = "ami-042ad9eec03638628"
   instance_type     = "t2.micro"
   availability_zone = "eu-central-1a"
   key_name          = "Calein"
