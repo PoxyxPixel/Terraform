@@ -1,1 +1,1 @@
-Lemnie
+Terraform project for AWS playground
